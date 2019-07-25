@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.d004494de1b0e4dcbca0625672c84783.js"
+  "/precache-manifest.e1319ffbe916127b6b34bd92ce8e9f60.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "glitch-starter"});
