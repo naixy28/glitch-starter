@@ -6,6 +6,7 @@
     "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "update": "npm run build && git add . && git commit -m \"update\" && git push ",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

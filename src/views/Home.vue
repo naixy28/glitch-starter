@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
+    <input class="ip" type="text">
     <HelloWorld msg="Welcome to Your Vue.js 4" @click.native="click"/>
     <div class="bottom-input">
       <input type="text">
@@ -28,6 +29,13 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.home
+  padding-bottom 50vh
+  border-bottom 100px solid red
+.ip
+  display block
+  border 1px solid black
+  height 30px
 .bottom-input
   position fixed
   bottom 0
