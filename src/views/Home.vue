@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js 3" @click.native="click"/>
+    <HelloWorld msg="Welcome to Your Vue.js 4" @click.native="click"/>
   </div>
 </template>
 
