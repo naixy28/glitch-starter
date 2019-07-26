@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js"/>
+    <HelloWorld msg="Welcome to Your Vue.js 3" @click.native="click"/>
   </div>
 </template>
 
@@ -13,6 +13,13 @@ export default {
   name: 'home',
   components: {
     HelloWorld
-  }
+  },
+  methods: {
+    click() {
+      if (confirm('sure to reload?')) {
+        window.location.reload(true)
+      }
+    }
+  },
 }
 </script>
