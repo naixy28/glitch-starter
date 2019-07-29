@@ -30,6 +30,7 @@ export default {
 
 <style lang="stylus" scoped>
 .home
+  background $YELLOW
   padding-bottom 50vh
   border-bottom 100px solid red
 .ip
