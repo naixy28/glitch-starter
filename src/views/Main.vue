@@ -15,10 +15,7 @@
             tag(k="豆瓣" v="YYYY")
             tag(k="云音乐" v="YYYY")
       .mid
-        .test
-        .test
-        .test
-        .test
+        chat.chat
     chat-bar.bottom-bar(
       @message="handleMessage"
     )
@@ -27,12 +24,14 @@
 <script>
 import Tag from '../components/Tag'
 import ChatBar from '../components/ChatBar'
+import Chat from '../components/Chat'
 
 export default {
   name: 'Main',
   components: {
     Tag,
     ChatBar,
+    Chat,
   },
   methods: {
     handleMessage({ value, res, rej } = {}) {
@@ -62,13 +61,14 @@ export default {
     padding 0 15px
     .tool
       height 50px
+      padding-top 44px
       display flex
       flex-flow row nowrap
       justify-content flex-end
       align-items center
       .setting
-        width 30px
-        height 30px
+        width 22px
+        height 22px
     .user
       margin-top 30px
       .avatar
@@ -89,7 +89,7 @@ export default {
     flex 1
     background $GREY2
     border-radius 8px
-    margin 15px
+    margin 15px 0 0
     overflow auto
     -webkit-overflow-scrolling touch
     .test
