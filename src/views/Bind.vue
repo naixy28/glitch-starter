@@ -16,13 +16,15 @@
           :class="{active: dbEnabled}"
         )
       .input-area
-        .label 绑定TA的社交网络账号
-        .input(
-          @click="paste"
+        .label 绑定TA的社交网络账号1
+        input.input(
+          :placeholder="placeholder"
+          ref="input"
+          @input="handleChange"
         )
-          fa(v-if="loading" class="sp" icon="spinner" :style="{ color: '#6A7A9E'}")
-          .text(v-else) {{ value || placeholder}}
+        fa(v-if="loading" class="sp" icon="spinner" :style="{ color: '#6A7A9E'}")
       .btns
+        .next(@click="handleBind") 绑定
         .next(@click="handleNext") 完成
     .flex-1
 </template>
@@ -49,36 +51,59 @@ export default {
       return this.enabled.indexOf('Douban') >= 0
     },
   },
-  watch: {
-    value(curr, prev) {
-      if (!prev && curr) {
-        console.log('paste detected!')
+  // watch: {
+  //   value(curr, prev) {
+  //     if (!prev && curr) {
+  //       console.log('paste detected!')
 
-        this.$service.bind(this.value)
-          .then(res => {
-            this.enabled = res.enabledExternals
-            this.value = ''
-            this.loading = false
-          })
-          .catch(() => {
-            setTimeout(() => {
-              this.value = ''
-              this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
-              this.loading = false
-            }, 1000)
-          })
+  //       this.$service.bind(this.value)
+  //         .then(res => {
+  //           this.enabled = res.enabledExternals
+  //           this.value = ''
+  //           this.loading = false
+  //         })
+  //         .catch(() => {
+  //           setTimeout(() => {
+  //             this.value = ''
+  //             this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
+  //             this.loading = false
+  //           }, 1000)
+  //         })
+  //     }
+  //   },
+  // },
+  methods: {
+    handleChange(e) {
+      const val = e.target.value
+
+      if (val) {
+        this.valid = true
+        this.value = val
+      } else {
+        this.valid = false
       }
     },
-  },
-  methods: {
+    handleBind() {
+      this.loading = true
+      this.$service.bind(this.value)
+        .then(res => {
+          this.enabled = res.enabledExternals
+          this.value = ''
+          this.loading = false
+          this.$refs.input.value = ''
+        })
+        .catch(() => {
+          setTimeout(() => {
+            this.value = ''
+            this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
+            this.loading = false
+            this.$refs.input.value = ''
+          }, 1000)
+        })
+    },
     handleNext() {
       this.$router.push('main')
     },
-    async paste() {
-      const text = await navigator.clipboard.readText()
-      this.value = text
-      this.loading = true
-    }
   },
   mounted() {
     // setTimeout(() => {
@@ -116,22 +141,26 @@ export default {
         opacity 1
     .input-area
       margin-top 60px
+      position relative
     .label
       color $GREY1
       font-weight 500
       font-size 18px
     .input
       width 264px
-      .sp
-        animation-name rotate
-        animation-duration .5s
-        animation-timing-function ease-in-out
-        animation-iteration-count infinite
-        animation-direction normal
+    .sp
+      position absolute
+      bottom 12px
+      right 10px
+      animation-name rotate
+      animation-duration .5s
+      animation-timing-function ease-in-out
+      animation-iteration-count infinite
+      animation-direction normal
     .btns
       margin-top 64px
     .next
-      margin 0 auto
+      margin 0 auto 10px
       opacity .7
       font-weight 500
       color $BLUE
