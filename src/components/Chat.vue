@@ -71,7 +71,7 @@ export default {
       height 17px
       border-radius 17px
       padding 7px
-      font-size 12px
+      font-size 10px
       font-weight 500
       line-height 17px
       color #888

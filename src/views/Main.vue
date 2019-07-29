@@ -8,13 +8,16 @@
           img.avatar
           .nickname
             .name {{'YY.Ryan'}}
-            .gender
+            fa.gender(:icon="'mars'" :class="{male: true}")
           .desc {{'asdfhjkasdhfjklhasjkldhf adshflk'}}
           .tags
             tag(k="微博" v="YYYY")
             tag(k="豆瓣" v="YYYY")
             tag(k="云音乐" v="YYYY")
       .mid
+        chat.chat
+        chat.chat
+        chat.chat
         chat.chat
     chat-bar.bottom-bar(
       @message="handleMessage"
@@ -79,9 +82,17 @@ export default {
         margin-bottom 5px
       .nickname
         color #fff
+        display flex
+        align-items center
         .name
           font-size 22px
           font-weight 500
+        .gender
+          margin-left 10px
+          &.female
+            color #F459C4
+          &.male
+            color #6772FF
       .desc
         color #fff
         font-size 16px
@@ -90,6 +101,7 @@ export default {
     background $GREY2
     border-radius 8px
     margin 15px 0 0
+    padding-bottom 75px
     overflow auto
     -webkit-overflow-scrolling touch
     .test
