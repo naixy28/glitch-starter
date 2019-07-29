@@ -5,10 +5,10 @@ const path = require('path')
 module.exports = {
   pwa: {
     name: 'My App1',
-    themeColor: '#FFE411',
-    msTileColor: '#FF24F1',
+    themeColor: '#6A7A9E',
+    msTileColor: '#FFFFFF',
     appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
+    appleMobileWebAppStatusBarStyle: 'black-translucent',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
