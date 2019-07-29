@@ -4,7 +4,7 @@ const path = require('path')
 
 module.exports = {
   pwa: {
-    name: 'My App1',
+    name: 'Rear Window',
     themeColor: '#6A7A9E',
     msTileColor: '#FFFFFF',
     appleMobileWebAppCapable: 'yes',

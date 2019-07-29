@@ -9,6 +9,12 @@ import {
   faSpinner,
   faCog,
   faBars,
+  faIdBadge,
+  faSearchPlus,
+  faStore,
+  faRocket,
+  faMars,
+  faVenus,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -29,7 +35,12 @@ window.onload = oldFun
     new VConsole() // eslint-disable-line
   }
 
-library.add(faSpinner, faCog, faBars)
+library.add(faSpinner, faCog, faBars, faIdBadge,
+  faSearchPlus,
+  faStore,
+  faRocket,
+  faMars,
+  faVenus,)
 
 Vue.component('fa', FontAwesomeIcon)
 

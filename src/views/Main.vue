@@ -19,7 +19,9 @@
         .test
         .test
         .test
-    chat-bar.bottom-bar()
+    chat-bar.bottom-bar(
+      @message="handleMessage"
+    )
 </template>
 
 <script>
@@ -32,6 +34,13 @@ export default {
     Tag,
     ChatBar,
   },
+  methods: {
+    handleMessage({ value, res, rej } = {}) {
+      setTimeout(() => {
+        res()
+      }, 1000)
+    }
+  }
 }
 </script>
 

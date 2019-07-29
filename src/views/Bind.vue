@@ -114,12 +114,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@keyframes rotate
-  from
-    transform rotate(0deg)
-  to
-    transform rotate(360deg)
-
 .wrapper
   height 100vh
   display flex
