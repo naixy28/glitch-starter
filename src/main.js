@@ -5,7 +5,11 @@ import store from './store'
 import './registerServiceWorker'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+  faSpinner,
+  faCog,
+  faBars,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { ser } from './utils/plugins'
@@ -25,7 +29,7 @@ window.onload = oldFun
     new VConsole() // eslint-disable-line
   }
 
-library.add(faSpinner)
+library.add(faSpinner, faCog, faBars)
 
 Vue.component('fa', FontAwesomeIcon)
 
