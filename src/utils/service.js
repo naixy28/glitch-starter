@@ -43,29 +43,33 @@ const http = Axios.create({
 http.interceptors.response.use(response => response, commonErrorHandler)
 
 export default {
-  // updatePlayerCamp(camp) {
-  //   return http.post('/players/update', {
-  //     camp,
-  //   })
-  // },
-  // /**
-  //  * @description 获取分享配置
-  //  */
-  // fetchShareConfig() {
-  //   return configClient.get('/fe-nanboku2-share')
-  // },
-  // /**
-  //  * @description 获取每日战报
-  //  */
-  // fetchPlayerReports() {
-  //   return http.get('/playerReports/show')
-  // },
-
-  // fetchDailyReports() {
-  //   return http.get('/dailyReports/show')
-  // },
-
-  // fetchFinalReports() {
-  //   return http.get('/final-reports/show')
-  // },
+  createTarget(name) {
+    return http.post('/target/create', {
+      name,
+    })
+  },
+  // Resp Body
+  //     name: string
+  //     gender?: 'Female' | 'Male'
+  //     birthday?: Date
+  //     city?: string
+  //     ...
+  // }
+  updateTarget(obj) {
+    return http.post('/target/updateProfile', {
+      ...obj,
+    })
+  },
+  // Resp Body
+  // { enabledExternals: ('Weibo' | 'Douban' | 'NeteaseMusic')[] }
+  bind(identifier) {
+    return http.post('/target/bindExternal', {
+      identifier,
+    })
+  },
+  // Resp Body
+  // { data: Update[] }
+  fetchList() {
+    http.post('/update/list')
+  }
 }

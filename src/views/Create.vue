@@ -3,8 +3,12 @@
     .flex-1
     .center
       .label 请输入TA的昵称
-      input.input
-      .btns
+      input.input(
+        @input="handleChange"
+      )
+      .btns(
+        :class="{show: valid}"
+      )
         .next(@click="handleNext") 完成
     .flex-1
 </template>
@@ -12,10 +16,35 @@
 <script>
 export default {
   name: 'Create',
+  data() {
+    return {
+      valid: false,
+      value: '',
+    }
+  },
   methods: {
     handleNext() {
-      this.$router.push('bind')
+      if (this.valid) {
+        this.$service.createTarget(this.value)
+          .then(res => {
+            this.$router.push('bind')
+          })
+          .catch(e => {
+            this.$router.push('bind')
+          })
+      }
     },
+    handleChange(e) {
+      const val = e.target.value
+
+      if (val) {
+        this.valid = true
+        this.value = val
+      } else {
+        this.valid = false
+      }
+      // console.log(val)
+    }
   },
 }
 </script>
@@ -39,7 +68,11 @@ export default {
   .input
     width 215px
   .btns
-      margin-top 64px
+    margin-top 64px
+    opacity 0
+    transition opacity .3s $TIMING
+    &.show
+      opacity 1
     .next
       margin 0 auto
       opacity .7
