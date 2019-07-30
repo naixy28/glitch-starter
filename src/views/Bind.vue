@@ -22,9 +22,11 @@
           ref="input"
           @input="handleChange"
         )
-        fa(v-if="loading" class="sp" icon="spinner" :style="{ color: '#6A7A9E'}")
+        //- fa(v-if="loading" class="sp" icon="spinner" :style="{ color: '#6A7A9E'}")
       .btns
-        .next(@click="handleBind") 绑定
+        .next(@click="handleBind")
+          fa(v-if="loading" class="sp" icon="spinner" :style="{ color: '#6A7A9E'}")
+          span(v-else) 绑定
         .next(@click="handleNext") 完成
     .flex-1
 </template>
@@ -63,6 +65,7 @@ export default {
       }
     },
     handleBind() {
+      if (this.loading) return
       this.loading = true
       this.$service.bind(this.value)
         .then(res => {
@@ -70,8 +73,11 @@ export default {
           this.value = ''
           this.loading = false
           this.$refs.input.value = ''
+          this.$toast('绑定成功', 2000, 'none')
         })
-        .catch(() => {
+        .catch(e => {
+          this.$toast(e, 2000, 'none')
+          this.loading = false
           // setTimeout(() => {
           //   this.value = ''
           //   this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
@@ -125,9 +131,6 @@ export default {
     .input
       width 264px
     .sp
-      position absolute
-      bottom 12px
-      right 10px
       animation-name rotate
       animation-duration .5s
       animation-timing-function ease-in-out

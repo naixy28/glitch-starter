@@ -52,7 +52,13 @@ export default {
     },
     fetch() {
       console.log('fetch once')
-      // this.$service.fetchList()
+      this.$service.fetchList()
+        .then(res => {
+          console.log(res.data.data)
+        })
+        .catch(e => {
+          this.$toast(e, 2000, 'none')
+        })
     }
   },
   mounted() {

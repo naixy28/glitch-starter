@@ -4,13 +4,13 @@
       name="fade"
     )
       .list(v-show="showMenu")
-        .item
+        .item(@click="to('member')")
           fa(icon="id-badge" :style="{color: 'white'}")
         .item
           fa(icon="search-plus" :style="{color: 'white'}")
-        .item
-          fa(icon="store" :style="{color: 'white'}")
-        .item
+        .item(@click="to('calendar')")
+          fa(icon="calendar-alt" :style="{color: 'white'}")
+        .item(@click="to('nasa')")
           fa(icon="rocket" :style="{color: 'white'}")
     fa.menu(
       icon="bars"
@@ -40,6 +40,9 @@ export default {
     }
   },
   methods: {
+    to(name) {
+      this.$router.push(name)
+    },
     handleToggleMenu() {
       this.showMenu = !this.showMenu
     },

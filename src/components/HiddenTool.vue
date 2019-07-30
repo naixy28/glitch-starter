@@ -5,7 +5,7 @@
 
 <script>
 const shouldShowBack = name => {
-  return [].indexOf(name) >= 0
+  return name.indexOf('fake') >= 0
 }
 
 export default {

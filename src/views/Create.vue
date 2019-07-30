@@ -9,7 +9,9 @@
       .btns(
         :class="{show: valid}"
       )
-        .next(@click="handleNext") 完成
+        .next(@click="handleNext")
+          fa(v-if="sending" class="sp" icon="spinner" :style="{ color: '#6A7A9E'}")
+          span(v-else) 完成
     .flex-1
 </template>
 
@@ -20,16 +22,20 @@ export default {
     return {
       valid: false,
       value: '',
+      sending: false,
     }
   },
   methods: {
     handleNext() {
-      if (this.valid) {
+      if (this.valid && !this.sending) {
+        this.sending = true
         this.$service.createTarget(this.value)
           .then(res => {
+            this.sending = false
             this.$router.push('bind')
           })
           .catch(e => {
+            this.sending = false
             this.$router.push('bind')
           })
       }
@@ -50,6 +56,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.sp
+  animation-name rotate
+  animation-duration .5s
+  animation-timing-function ease-in-out
+  animation-iteration-count infinite
+  animation-direction normal
 .wrapper
   height 100vh
   background url(../assets/common-bg.jpg), $BLUE

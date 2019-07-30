@@ -11,7 +11,7 @@ import {
   faBars,
   faIdBadge,
   faSearchPlus,
-  faStore,
+  faCalendarAlt,
   faRocket,
   faMars,
   faVenus,
@@ -39,7 +39,7 @@ window.onload = oldFun
 
 library.add(faSpinner, faCog, faBars, faIdBadge,
   faSearchPlus,
-  faStore,
+  faCalendarAlt,
   faRocket,
   faMars,
   faVenus,

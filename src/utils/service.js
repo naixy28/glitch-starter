@@ -70,6 +70,6 @@ export default {
   // Resp Body
   // { data: Update[] }
   fetchList() {
-    http.post('/update/list')
+    return http.post('/update/list')
   }
 }
