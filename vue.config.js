@@ -9,11 +9,17 @@ module.exports = {
     msTileColor: '#FFFFFF',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black-translucent',
-    appleTouchStartupImage: '/cover.jpg',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
-    }
+    },
+    iconPaths: {
+      favicon32: 'img/icons/favicon.png',
+      favicon16: 'img/icons/favicon.png',
+      appleTouchIcon: 'img/icons/favicon.png',
+      maskIcon: 'img/icons/safari-pinned-tab.svg',
+      msTileImage: 'img/icons/favicon.png'
+    },
   },
   css: {
     loaderOptions: {
