@@ -16,7 +16,7 @@
           :class="{active: dbEnabled}"
         )
       .input-area
-        .label 绑定TA的社交网络账号1
+        .label 绑定TA的社交网络账号
         input.input(
           :placeholder="placeholder"
           ref="input"
@@ -51,27 +51,6 @@ export default {
       return this.enabled.indexOf('Douban') >= 0
     },
   },
-  // watch: {
-  //   value(curr, prev) {
-  //     if (!prev && curr) {
-  //       console.log('paste detected!')
-
-  //       this.$service.bind(this.value)
-  //         .then(res => {
-  //           this.enabled = res.enabledExternals
-  //           this.value = ''
-  //           this.loading = false
-  //         })
-  //         .catch(() => {
-  //           setTimeout(() => {
-  //             this.value = ''
-  //             this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
-  //             this.loading = false
-  //           }, 1000)
-  //         })
-  //     }
-  //   },
-  // },
   methods: {
     handleChange(e) {
       const val = e.target.value
@@ -87,18 +66,18 @@ export default {
       this.loading = true
       this.$service.bind(this.value)
         .then(res => {
-          this.enabled = res.enabledExternals
+          this.enabled = res.data.updateSources.map(e => e.external)
           this.value = ''
           this.loading = false
           this.$refs.input.value = ''
         })
         .catch(() => {
-          setTimeout(() => {
-            this.value = ''
-            this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
-            this.loading = false
-            this.$refs.input.value = ''
-          }, 1000)
+          // setTimeout(() => {
+          //   this.value = ''
+          //   this.enabled = ['Weibo', 'Douban', 'NeteaseMusic']
+          //   this.loading = false
+          //   this.$refs.input.value = ''
+          // }, 1000)
         })
     },
     handleNext() {

@@ -35,7 +35,7 @@ const commonErrorHandler = e => {
 // http.defaults.headers.common['platform'] = IS_APP || IS_DEV ? 'app' : 'web'
 // const configClient = Axios.create({ baseURL: 'https://app.jike.ruguoapp.com/1.0/configs/get' })
 
-const host = ''
+const host = 'https://4247092b.ngrok.io/'
 const http = Axios.create({
   baseURL: host,
 })

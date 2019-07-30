@@ -15,10 +15,11 @@
             tag(k="豆瓣" v="YYYY")
             tag(k="云音乐" v="YYYY")
       .mid
-        chat.chat
-        chat.chat
-        chat.chat
-        chat.chat
+        fa(v-show="chats.length <= 0" class="sp" icon="spinner" :style="{ color: 'white'}")
+        //- chat.chat
+        //- chat.chat
+        //- chat.chat
+        //- chat.chat
     chat-bar.bottom-bar(
       @message="handleMessage"
     )
@@ -36,13 +37,42 @@ export default {
     ChatBar,
     Chat,
   },
+  data() {
+    return {
+      timer: undefined,
+      fetching: false,
+      chats: [],
+    }
+  },
   methods: {
     handleMessage({ value, res, rej } = {}) {
       setTimeout(() => {
         res()
       }, 1000)
+    },
+    fetch() {
+      console.log('fetch once')
+      // this.$service.fetchList()
     }
-  }
+  },
+  mounted() {
+    this.fetch()
+    this.timer = setInterval(() => {
+      if (!this.fetching) {
+        this.fetch()
+      }
+    }, 5000)
+    // this.$service.fetchList()
+    //   .then(res => {
+    //     debugger
+    //   })
+    //   .catch(e => {
+    //     debugger
+    //   })
+  },
+  destroyed() {
+    clearInterval(this.timer)
+  },
 }
 </script>
 
@@ -104,11 +134,15 @@ export default {
     padding-bottom 75px
     overflow auto
     -webkit-overflow-scrolling touch
-    .test
-      background grey
-      height 500px
-      width 70vw
-      margin 10px 0
+    .sp
+      display block
+      margin 200px auto
+      font-size 25px
+      animation-name rotate
+      animation-duration .5s
+      animation-timing-function ease-in-out
+      animation-iteration-count infinite
+      animation-direction normal
 .bar
   position fixed
   bottom 0

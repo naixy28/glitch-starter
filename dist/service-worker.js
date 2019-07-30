@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.bb5a2760e55265a7a3694ab9147b13d1.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/precache-manifest.64d710a3a9f836c7c1c06807e34e48d1.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 /* eslint-disable */
 workbox.core.setCacheNameDetails({prefix: "glitch-starter"});

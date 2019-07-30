@@ -1,5 +1,6 @@
 <template lang="pug">
   .tools(@click="click")
+    fa(icon="chevron-left" :style="{color: 'white'}")
 </template>
 
 <script>
@@ -20,8 +21,10 @@ export default {
 
 <style lang="stylus" scoped>
 .tools
-  opacity 0
+  opacity 1
   width 100px
   height 50px
-  border 1px solid red
+  & > svg
+    font-size 22px
+    margin 35px 15px
 </style>

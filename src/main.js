@@ -16,6 +16,7 @@ import {
   faMars,
   faVenus,
   faPencilAlt,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -42,6 +43,7 @@ library.add(faSpinner, faCog, faBars, faIdBadge,
   faRocket,
   faMars,
   faVenus,
+  faChevronLeft,
   faPencilAlt)
 
 Vue.component('fa', FontAwesomeIcon)
