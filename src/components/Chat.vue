@@ -3,18 +3,19 @@
     .left(:class="{hide: chat.isSelf}")
       img.avatar
     .center
-      .title 我更新了一条微博
-      .subtitle 1小时前 来自微博
-      .music
-        img.logo
-        .song
-          .name 女爵
-          .singer 杨乃文
+      template(v-if="!chat.isSelf")
+        .title 我更新了一条微博
+        .subtitle 1小时前 来自微博
+        .music
+          img.logo
+          .song
+            .name 女爵
+            .singer 杨乃文
       .content(v-if="chat.content") {{chat.content}}
       //- .diary-tag #[fa(icon="pencil-alt")] 日记
-      .send-time 2019年7月31日 20:21
+      .send-time(v-if="chat.content && chat.isSelf") {{chat.createdAt | formatTime}}
     .right(:class="{hide: !chat.isSelf}")
-      img.avatar
+      .avatar.self
 </template>
 <script>
 export default {
@@ -49,6 +50,11 @@ export default {
     border-radius 50px
     overflow hidden
     background grey
+  .self
+    background url(http://japan.people.com.cn/NMediaFile/2018/0921/MAIN201809211240000389013678253.jpg)
+    background-position center center
+    background-size 100%
+    background-position-y 0px
   .center
     flex 1
     min-height 50px

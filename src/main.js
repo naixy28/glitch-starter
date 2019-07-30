@@ -22,6 +22,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { ser } from './utils/plugins'
 
+const padLeft = (str, max) => {
+  str = str.toString()
+  return str.length < max ? padLeft('0' + str, max) : str
+}
+
 var head = document.getElementsByTagName('head').item(0)
 var script = document.createElement('script')
 script.setAttribute('type', 'text/javascript')
@@ -47,6 +52,11 @@ library.add(faSpinner, faCog, faBars, faIdBadge,
   faPencilAlt)
 
 Vue.component('fa', FontAwesomeIcon)
+Vue.filter('formatTime', time => {
+  const t = new Date(time)
+
+  return `${t.getFullYear()}年${t.getMonth() + 1}月${t.getDate()}日 ${padLeft(t.getHours(), 2)}:${padLeft(t.getMinutes(), 2)}`
+})
 
 Vue.use(ser)
 

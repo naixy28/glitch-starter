@@ -119,6 +119,8 @@ export default {
         height 60px
         margin 0 10px
       .active
+        background rgba(255,255,255,.4)
+        border-radius 8px
         filter grayscale(0%)
         opacity 1
     .input-area
