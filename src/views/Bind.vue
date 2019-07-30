@@ -99,6 +99,9 @@ export default {
   flex-flow column nowrap
   justify-content center
   align-items center
+  background url(../assets/common-bg.jpg), $BLUE
+  background-size cover
+  background-repeat no-repeat
   .center
     text-align center
     .icons

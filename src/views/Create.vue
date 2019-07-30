@@ -52,7 +52,9 @@ export default {
 <style lang="stylus" scoped>
 .wrapper
   height 100vh
-  background-color $BLUE
+  background url(../assets/common-bg.jpg), $BLUE
+  background-size cover
+  background-repeat no-repeat
   display flex
   flex-flow column nowrap
   justify-content center

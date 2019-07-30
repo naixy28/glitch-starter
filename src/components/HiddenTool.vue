@@ -1,18 +1,25 @@
 <template lang="pug">
   .tools(@click="click")
-    fa(icon="chevron-left" :style="{color: 'white'}")
+    //- fa(icon="chevron-left" :style="{color: 'white'}")
 </template>
 
 <script>
+const shouldShowBack = name => {
+  return [].indexOf(name) >= 0
+}
+
 export default {
   name: 'Hidden',
   methods: {
     click() {
-      // alert('clicked')
-      if (confirm('back or reload?')) {
-        this.$router.back()
+      if (this.$route.name && !shouldShowBack(this.$route.name)) {
+        if (confirm('back or reload?')) {
+          this.$router.back()
+        } else {
+          window.location.reload(true)
+        }
       } else {
-        window.location.reload(true)
+        this.$router.back()
       }
     },
   }

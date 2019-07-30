@@ -1,4 +1,4 @@
-const pkg = require('./package.json')
+// const pkg = require('./package.json')
 const px2viewport = require('postcss-px-to-viewport')
 const path = require('path')
 
@@ -9,6 +9,7 @@ module.exports = {
     msTileColor: '#FFFFFF',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black-translucent',
+    appleTouchStartupImage: '/cover.jpg',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       swSrc: 'src/service-worker.js',
