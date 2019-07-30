@@ -51,6 +51,11 @@ export default {
   fetchTarget(name) {
     return http.post('/target/detail')
   },
+  postDiary(content) {
+    return http.post('/diary/post', {
+      content,
+    })
+  },
   // Resp Body
   //     name: string
   //     gender?: 'Female' | 'Male'

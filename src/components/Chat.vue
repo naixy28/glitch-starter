@@ -1,6 +1,6 @@
 <template lang="pug">
   .chat-item
-    .left(:class="{hide: chatObj.fromSelf}")
+    .left(:class="{hide: chat.isSelf}")
       img.avatar
     .center
       .title 我更新了一条微博
@@ -10,21 +10,21 @@
         .song
           .name 女爵
           .singer 杨乃文
-      .content 一大堆字在这里一大堆字在这里一大堆字在这里一大堆字在这里一大堆字在这里一大堆字在这里一大堆字在这里
+      .content(v-if="chat.content") {{chat.content}}
       .diary-tag #[fa(icon="pencil-alt")] 日记
       .send-time 2019年7月31日 20:21
-    .right(:class="{hide: !chatObj.fromSelf}")
+    .right(:class="{hide: !chat.isSelf}")
       img.avatar
 </template>
 <script>
 export default {
   name: 'Chat',
   props: {
-    chatObj: {
+    chat: {
       type: Object,
       default() {
         return {
-          fromSelf: true,
+          isSelf: true,
         }
       },
     }
