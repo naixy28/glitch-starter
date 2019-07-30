@@ -11,7 +11,7 @@
           .name 女爵
           .singer 杨乃文
       .content(v-if="chat.content") {{chat.content}}
-      .diary-tag #[fa(icon="pencil-alt")] 日记
+      //- .diary-tag #[fa(icon="pencil-alt")] 日记
       .send-time 2019年7月31日 20:21
     .right(:class="{hide: !chat.isSelf}")
       img.avatar

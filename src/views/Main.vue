@@ -5,15 +5,13 @@
         .tool
           fa(class="setting" icon="cog" :style="{color: 'white'}")
         .user
-          img.avatar
+          img.avatar(:src="profile.avatarUrl")
           .nickname
-            .name {{'YY.Ryan'}}
+            .name {{profile.name}}
             fa.gender(:icon="'mars'" :class="{male: true}")
-          .desc {{'asdfhjkasdhfjklhasjkldhf adshflk'}}
-          .tags
-            tag(k="微博" v="YYYY")
-            tag(k="豆瓣" v="YYYY")
-            tag(k="云音乐" v="YYYY")
+          .desc {{'有0个人和你一样在看他'}}
+          .tags(v-if="sources.length")
+            tag(v-for="s in sources" :k="s.key" :v="s.value")
       .mid(ref="scrollList")
         fa(v-show="chats.length <= 0" class="sp" icon="spinner" :style="{ color: 'white'}")
         template(v-show="chats.length")
@@ -22,10 +20,6 @@
             :key="chat.id"
             :chat="chat"
           )
-        //- chat.chat
-        //- chat.chat
-        //- chat.chat
-        //- chat.chat
     chat-bar.bottom-bar(
       @message="handleMessage"
     )
@@ -35,6 +29,11 @@
 import Tag from '../components/Tag'
 import ChatBar from '../components/ChatBar'
 import Chat from '../components/Chat'
+const sourceMap = {
+  Weibo: '微博',
+  Douban: '豆瓣',
+  NeteaseMusic: '云音乐',
+}
 
 const animete = ({ duration, draw, easing }) => {
   let start
@@ -73,6 +72,8 @@ export default {
       timer: undefined,
       fetching: false,
       chats: [],
+      profile: {},
+      sources: [],
     }
   },
   methods: {
@@ -82,36 +83,39 @@ export default {
           console.log(res)
           resolve()
 
-          this.fetch()
+          this.fetch(true)
         })
         .catch(e => {
           rej()
           this.$toast(e, 2000, 'none')
         })
     },
-    fetch() {
+    fetch(shouldScroll = false) {
       console.log('fetch once')
       this.$service.fetchList()
         .then(res => {
+          let needScroll = false
           if (res.data.data && res.data.data.length) {
+            needScroll = shouldScroll && this.chats.length !== res.data.data.length
             this.chats = res.data.data.reverse()
           }
-          this.$nextTick(() => {
-            animete({
-              draw: (() => {
-                const el = this.$refs.scrollList
-                const currScrollTop = el.scrollTop
-                const targetScrollTop = el.scrollHeight - el.getBoundingClientRect().height
-                const delta = Math.max(targetScrollTop - currScrollTop, 0)
-                return percent => {
-                  el.scrollTo(0, currScrollTop + delta * percent)
-                }
-              })(),
-              duration: 1000,
-              easing: x => x * x,
+          if (needScroll) {
+            this.$nextTick(() => {
+              animete({
+                draw: (() => {
+                  const el = this.$refs.scrollList
+                  const currScrollTop = el.scrollTop
+                  const targetScrollTop = el.scrollHeight - el.getBoundingClientRect().height
+                  const delta = Math.max(targetScrollTop - currScrollTop, 0)
+                  return percent => {
+                    el.scrollTo(0, currScrollTop + delta * percent)
+                  }
+                })(),
+                duration: 1000,
+                easing: x => x * x,
+              })
             })
-            this.$refs.scrollList.scrollTo(0, 2000)
-          })
+          }
         })
         .catch(e => {
           this.$toast(e, 2000, 'none')
@@ -121,18 +125,36 @@ export default {
       this.$service.fetchTarget()
         .then(res => {
           console.log('profile:', res.data)
+          const { profile, updateSources } = res.data
+
+          this.profile = profile
+          if (updateSources.length) {
+            this.sources = updateSources.map(s => {
+              let key
+              let value
+
+              if (s.external in sourceMap) {
+                key = sourceMap[s.external]
+                value = s.name
+              }
+              return {
+                key,
+                value
+              }
+            })
+          }
         })
     },
   },
   mounted() {
     this.init()
-    this.fetch()
+    this.fetch(true)
     // FIXME
-    // this.timer = setInterval(() => {
-    //   if (!this.fetching) {
-    //     this.fetch()
-    //   }
-    // }, 5000)
+    this.timer = setInterval(() => {
+      if (!this.fetching) {
+        this.fetch()
+      }
+    }, 5000)
   },
   destroyed() {
     clearInterval(this.timer)
@@ -189,7 +211,7 @@ export default {
             color #6772FF
       .desc
         color #fff
-        font-size 16px
+        font-size 14px
   .mid
     flex 1
     background $GREY2
