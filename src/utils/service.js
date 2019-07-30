@@ -48,6 +48,9 @@ export default {
       name,
     })
   },
+  fetchTarget(name) {
+    return http.post('/target/detail')
+  },
   // Resp Body
   //     name: string
   //     gender?: 'Female' | 'Male'

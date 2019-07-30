@@ -59,9 +59,16 @@ export default {
         .catch(e => {
           this.$toast(e, 2000, 'none')
         })
-    }
+    },
+    init() {
+      this.$service.fetchTarget()
+        .then(res => {
+          console.log('profile:', res.data)
+        })
+    },
   },
   mounted() {
+    this.init()
     this.fetch()
     this.timer = setInterval(() => {
       if (!this.fetching) {
