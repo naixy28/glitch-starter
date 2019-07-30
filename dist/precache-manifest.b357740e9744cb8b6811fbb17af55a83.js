@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/img/icon-wb.3aaaa513.png"
   },
   {
-    "revision": "f38f57499f3fd3d8d0231993e75899d5",
+    "revision": "786dda7fc8b67eb3261d76e904b9ff49",
     "url": "/index.html"
   },
   {
