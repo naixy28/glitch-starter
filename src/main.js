@@ -31,7 +31,8 @@ const DAY = 86400
 const HOUR = 3600
 const MIN = 60
 
-const formatTime = (ms) => {
+const formatTime = (d) => {
+  const ms = Date.now() - new Date(d)
   if (!ms || ms <= 0) {
     return ''
   }
