@@ -16,7 +16,7 @@
           :class="{active: dbEnabled}"
         )
       .input-area
-        .label 绑定TA的社交网络账号
+        .label 确定你的观察范围
         input.input(
           :placeholder="placeholder"
           ref="input"
@@ -38,7 +38,7 @@ export default {
     return {
       enabled: [], // 'Weibo' | 'Douban' | 'NeteaseMusic'
       value: '',
-      placeholder: '复制链接到此处',
+      placeholder: '复制以上任意平台的主页链接',
       loading: false,
     }
   },

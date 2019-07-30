@@ -1,19 +1,21 @@
 <template lang="pug">
   .chat-item
     .left(:class="{hide: chat.isSelf}")
-      img.avatar
+      .avatar(:style="{backgroundImage: `url(${avatar})`}")
     .center
       template(v-if="!chat.isSelf")
-        .title 我更新了一条微博
-        .subtitle 1小时前 来自微博
-        .music
-          img.logo
+        .title(v-if="chat.title") {{ chat.title }}
+        .subtitle #[span(v-if="chat.actionTime") {{chat.actionTime | formatPassedTime}}] &nbsp; #[span(v-if="chat.subtitle") {{chat.subtitle}}]
+        .music(v-if="chat.music")
+          img.logo(:src="chat.music.albumPicUrl")
           .song
-            .name 女爵
-            .singer 杨乃文
+            .name {{ chat.music.name }}
+            .singer {{ chat.music.author }}
       .content(v-if="chat.content") {{chat.content}}
+      .imgs(v-if="chat.picUrls && chat.picUrls.length")
+        .im(:style="{backgroundImage: `url(${chat.picUrls[0]})`}")
       //- .diary-tag #[fa(icon="pencil-alt")] 日记
-      .send-time(v-if="chat.content && chat.isSelf") {{chat.createdAt | formatTime}}
+      .send-time(v-if="chat.content && chat.isSelf") {{chat.actionTime | formatTime}}
     .right(:class="{hide: !chat.isSelf}")
       .avatar.self
 </template>
@@ -21,6 +23,7 @@
 export default {
   name: 'Chat',
   props: {
+    avatar: String,
     chat: {
       type: Object,
       default() {
@@ -50,11 +53,14 @@ export default {
     border-radius 50px
     overflow hidden
     background grey
-  .self
-    background url(http://japan.people.com.cn/NMediaFile/2018/0921/MAIN201809211240000389013678253.jpg)
     background-position center center
     background-size 100%
     background-position-y 0px
+  .self
+    background-image url(http://japan.people.com.cn/NMediaFile/2018/0921/MAIN201809211240000389013678253.jpg)
+    // background-position center center
+    // background-size 100%
+    // background-position-y 0px
   .center
     flex 1
     min-height 50px
@@ -88,6 +94,13 @@ export default {
     .content
       margin-bottom 5px
       font-size 12px
+    .imgs
+      .im
+        width 75px
+        height 75px
+        background-position center center
+        background-size 100%
+        background-position-y 0px
     .music
       margin-bottom 5px
       display flex

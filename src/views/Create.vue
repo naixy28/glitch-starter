@@ -2,7 +2,7 @@
   .wrapper
     .flex-1
     .center
-      .label 请输入TA的昵称
+      .label 输入观察对象的昵称
       input.input(
         @input="handleChange"
       )

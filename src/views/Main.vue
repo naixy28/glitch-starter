@@ -19,6 +19,7 @@
             v-for="(chat, i) in chats"
             :key="chat.id"
             :chat="chat"
+            :avatar="profile.avatarUrl"
           )
     chat-bar.bottom-bar(
       @message="handleMessage"
@@ -154,7 +155,7 @@ export default {
       if (!this.fetching) {
         this.fetch()
       }
-    }, 5000)
+    }, 10000)
   },
   destroyed() {
     clearInterval(this.timer)

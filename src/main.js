@@ -27,20 +27,60 @@ const padLeft = (str, max) => {
   return str.length < max ? padLeft('0' + str, max) : str
 }
 
-var head = document.getElementsByTagName('head').item(0)
-var script = document.createElement('script')
-script.setAttribute('type', 'text/javascript')
-script.setAttribute('src', 'https://cdn.bootcss.com/vConsole/3.3.2/vconsole.min.js')
-head.appendChild(script)
-var oldFun = window.onload
-window.onload = oldFun
-  ? function() {
-    oldFun()
-    new VConsole() // eslint-disable-line
+const DAY = 86400
+const HOUR = 3600
+const MIN = 60
+
+const formatTime = (ms) => {
+  if (!ms || ms <= 0) {
+    return ''
   }
-  : function() {
-    new VConsole() // eslint-disable-line
+
+  const total = ~~(ms / 1000)
+  const day = ~~(total / DAY)
+  const hour = ~~((total % DAY) / HOUR)
+  const min = ~~((total % HOUR) / MIN)
+  const second = ~~(total % MIN)
+
+  return {
+    day,
+    hour,
+    min,
+    second,
   }
+}
+
+const formatTimeFactory = template => ms => {
+  return template(formatTime(ms))
+}
+
+const formatPassedTime = formatTimeFactory(({ day, hour, min }) => {
+  if (day > 0) {
+    return `${day}天前`
+  }
+  if (hour > 0) {
+    return `${hour}小时前`
+  }
+  if (min > 0) {
+    return `${min}分钟前`
+  }
+  return `刚才`
+})
+
+// var head = document.getElementsByTagName('head').item(0)
+// var script = document.createElement('script')
+// script.setAttribute('type', 'text/javascript')
+// script.setAttribute('src', 'https://cdn.bootcss.com/vConsole/3.3.2/vconsole.min.js')
+// head.appendChild(script)
+// var oldFun = window.onload
+// window.onload = oldFun
+//   ? function() {
+//     oldFun()
+//     new VConsole() // eslint-disable-line
+//   }
+//   : function() {
+//     new VConsole() // eslint-disable-line
+//   }
 
 library.add(faSpinner, faCog, faBars, faIdBadge,
   faSearchPlus,
@@ -52,6 +92,7 @@ library.add(faSpinner, faCog, faBars, faIdBadge,
   faPencilAlt)
 
 Vue.component('fa', FontAwesomeIcon)
+Vue.filter('formatPassedTime', formatPassedTime)
 Vue.filter('formatTime', time => {
   const t = new Date(time)
 
