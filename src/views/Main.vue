@@ -119,7 +119,8 @@ export default {
           }
         })
         .catch(e => {
-          this.$toast(e, 2000, 'none')
+          // this.$toast(e, 2000, 'none')
+          this.$toast('卡了一下，不是BUG', 2000, 'none')
         })
     },
     init() {
